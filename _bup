@@ -1,0 +1,55 @@
+_bup() {
+    local line state
+
+    _arguments \
+        -C \
+        {-?,--help'[display help info]' \
+        '-d[set BUP_DIR]' \
+        '--debug' \
+        '--profile' \
+        '--version' \
+        '1: :->subcmds' \
+        '*::arg:->args'
+
+    case $state in
+        subcmds)
+            _values \
+                'bup subcommands' \
+                'help' \
+                'init' \
+                'fsck'
+            ;;
+        args)
+            case $line[1] in
+                init) _bup_init ;;
+                fsck) _bup_fsck ;;
+            esac
+            ;;
+    esac
+
+}
+
+_bup_init() {
+    _arguments \
+        {-r,--remote}'[run on remote host]'
+}
+
+_bup_fsck() {
+    _arguments \
+        {-r,--repair}'[attmept to repair damaged blocks]' \
+        {-g,--generate}'[generate recovery blocks]' \
+        '--quick' \
+        {-j,--jobs}'[maximum number of pack verfications to run at a time]' \
+        '--par2-ok' \
+        '--disable-par2'
+               
+}
+
+_bup_index() {
+    _arguments \
+        {-u,--update}'[update the index]' \
+        {-p,--print}'[print the contents of the index]' \
+        {-m,--modifed}'[prints only modified files]' \
+        '--clear' \
+        ':filename:_files'
+}
