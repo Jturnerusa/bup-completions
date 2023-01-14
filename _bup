@@ -41,8 +41,7 @@ _bup_fsck() {
         '--quick' \
         {-j,--jobs}'[maximum number of pack verfications to run at a time]' \
         '--par2-ok' \
-        '--disable-par2'
-               
+        '--disable-par2'               
 }
 
 _bup_index() {
