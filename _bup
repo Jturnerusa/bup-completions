@@ -1,5 +1,6 @@
 _bup() {
-    local line state
+    local context state state_descr line
+    typeset -A opt_args
 
     _arguments \
         -C \
@@ -17,12 +18,22 @@ _bup() {
                 'bup subcommands' \
                 'help' \
                 'init' \
-                'fsck'
+                'fsck' \
+                'tag' \
+                'ls' \
+                'index' \
+                'save' \
+                'restore'
             ;;
         args)
             case $line[1] in
-                init) _bup_init ;;
-                fsck) _bup_fsck ;;
+                init)    _bup_init    ;;
+                fsck)    _bup_fsck    ;;
+                tag)     _bup_tag     ;;
+                ls)      _bup_ls      ;;
+                index)   _bup_index   ;;
+                save)    _bup_save    ;;
+                restore) _bup_restore ;;
             esac
             ;;
     esac
@@ -44,6 +55,16 @@ _bup_fsck() {
         '--disable-par2'               
 }
 
+_bup_tag() {
+    _arguments \
+        {-d,--delete}'[delete tag]' \
+        {-f,--force}'[overwrite tag]'
+}
+
+_bup_ls() {    
+    _arguments {-r,--remote}
+}
+
 _bup_index() {
     _arguments \
         {-u,--update}'[update the index]' \
@@ -51,4 +72,22 @@ _bup_index() {
         {-m,--modifed}'[prints only modified files]' \
         '--clear' \
         ':filename:_files'
+}
+
+_bup_save() {
+    _arguments \
+        {-r,--remote}'[save to a remote server]' \
+        {-t,--tree}'[print git tree id]' \
+        {-c,--commit}'[print git commit id]' \
+        {-n,--name}'[branch name]' \
+        {-d,--date}'[specify the date]' \
+        {-f,--indexfile}'[use a different index file]' \
+        {-v,--verbose}'[increase verbosity (can be used more than once)]' \
+        {-q,--quiet}'[disable progress messages]' \
+        --smaller'[only backup files smaller than this]' \
+        --bwlimit'[throttle network bandwidth]' \
+        --strip'[strips path from all files and directories]' \
+        --strip-path'[strips the given prefix path from all files and directories]' \
+        --graft'[a graft point]' \
+        {-#,--compress}'[compression level]'
 }
