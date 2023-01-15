@@ -83,7 +83,7 @@ _bup_save() {
         {-c,--commit}'[print git commit id]' \
         {-n,--name}'[branch name]' \
         {-d,--date}'[specify the date]' \
-        {-f,--indexfile}'[use a different index file]' \
+        {-f,--indexfile}'[use a different index file]:filename:_files' \
         {-v,--verbose}'[increase verbosity (can be used more than once)]' \
         {-q,--quiet}'[disable progress messages]' \
         --smaller'[only backup files smaller than this]' \
