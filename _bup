@@ -1,3 +1,5 @@
+#compdef bup
+
 _bup() {
     local context state state_descr line
     typeset -A opt_args
