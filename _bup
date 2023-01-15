@@ -93,3 +93,15 @@ _bup_save() {
         --graft'[a graft point]' \
         {-#,--compress}'[compression level]'
 }
+
+_bup_restore() {
+    _arguments \
+        {-r,--remote}'[restore from the given server]' \
+        {-C,--outdir}'[create and restore files into this directory]:filename:_files' \
+        '--exclude-rx[exclude any paths with pattern]' \
+        '--exclude-rx-from[read patterns from file]' \
+        '--sparse[write output data sparsely when reasonable]' \
+        --map-{user,group,uid,gid}'[map owner metadata]' \
+        {-v,--verbose}'[increase log output]' \
+        {-q,--quiet}'[suppress output]'
+}
